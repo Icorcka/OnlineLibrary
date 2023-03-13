@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../connection";
-import Book from "./Book";
+import Subscription from "./Subscription";
 import User from "./User";
 
 const UserSubscription = sequelize.define("UserSubscription", {
@@ -9,7 +9,11 @@ const UserSubscription = sequelize.define("UserSubscription", {
     }
 });
 
-UserSubscription.belongsTo(Book);
-UserSubscription.belongsTo(User);
+UserSubscription.belongsTo(Subscription, {
+    foreignKey: 'subscriptionId'
+});
+UserSubscription.belongsTo(User, {
+    foreignKey: 'userId'
+});
 
 export default UserSubscription;
